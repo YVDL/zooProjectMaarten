@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+
+<div th:insert="fragments/head :: nav"></div>
+
+
+<div class="fresh-table full-color-orange">
+    <table id="fresh-table" class="table"
+           data-toggle="table"
+           data-search="true"
+           data-show-columns="true">
+
+        <thead>
+        <tr class="tr-class-1">
+            <th data-field="type" rowspan="2" data-valign="middle" style="text-align:right">Type of animal</th>
+            <th data-field="name" rowspan="2" data-valign="middle">Name</th>
+            <th colspan="3" style="text-align:center; border-left: 1px solid">Detail</th>
+            <th rowspan="2" style="text-align:center; border-left: 1px solid">Actions</th>
+
+        </tr>
+        <tr class="tr-class-1">
+            <th data-field="id" style="width:5%; border-left: 1px solid; text-align:center">Id</th>
+            <th data-field="food" style="width:15%; text-align:center">Food</th>
+            <th data-field="country" style="width:15%; text-align:center">Country</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="tiger : ${allAnimals}">
+            <td style="text-align:right">Tiger</td>
+            <td th:text="${tiger.getName()}"></td>
+            <td th:text="${tiger.getId()}" style="text-align:center"></td>
+            <td>
+                <ul style="text-align:center">
+                    <li th:each="food:${tiger.getFoods()}"><span th:text="${food.getFoodName()}"></span></li>
+                </ul>
+            </td>
+            <td th:text="${tiger.getCountry().getName()}"></td>
+            <td style="text-align:center">
+                <a th:href="@{editPage/{id}(id=${tiger.getId()})}"><span class="material-icons">edit</span></a>
+                <a th:href="@{remove/{id}(id=${tiger.getId()})}"><span class="material-icons">delete</span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
+
+
+<!--<tr id="tr-id-1" class="tr-class-1" data-title="bootstrap table" data-object='{"key": "value"}'>-->
+<!--    <td id="td-id-1" class="td-class-1" data-title="bootstrap table">-->
+<!--        <a href="https://github.com/wenzhixin/bootstrap-table" target="_blank">Tiger</a>-->
+<!--    </td>-->
+<!--    <td data-text="name">Jeffff</td>-->
+<!--    <td data-value="id">001</td>-->
+<!--    <td data-text="food">Meat</td>-->
+<!--    <td data-text="country">Belgium</td>-->
+<!--</tr>-->
